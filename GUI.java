@@ -9,6 +9,8 @@ public class GUI extends JFrame implements KeyListener{
     private final Color BOARD_COLOR = new Color(0x1E1E1E); // Board bg
     private final Color EMPTY_TILE_COLOR = new Color(0x2A2A2A); // Empty tile
     private final Color FONT_COLOR = new Color(0xF5F5F5); // Text color
+    private final Color RED_HUE = new Color(0x9C3A3A);  // A deep, muted red
+
     private JLabel scoreLabel;
     private JLabel highScoreLabel;
     private JLabel nameLabel;
@@ -98,19 +100,20 @@ public class GUI extends JFrame implements KeyListener{
 
     private JPanel createScorePanel(){
         JPanel panel = new JPanel();
-        panel.setBackground(BOARD_COLOR);
-        panel.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 10));
+        panel.setBackground(RED_HUE);
+        panel.setLayout(new FlowLayout(FlowLayout.LEFT, 40, 10));
 
         nameLabel = new JLabel("2048");
         scoreLabel = new JLabel("Score: " + score);
         highScoreLabel = new JLabel("High Score: " + highScore);
-        Font labelFont = new Font("Space Grotesk", Font.PLAIN, 16);
+        Font labelFont = new Font("Segoe UI", Font.PLAIN, 16);
         nameLabel.setFont(labelFont);
         scoreLabel.setFont(labelFont);
         highScoreLabel.setFont(labelFont);
         nameLabel.setForeground(FONT_COLOR);
         scoreLabel.setForeground(FONT_COLOR);
         highScoreLabel.setForeground(FONT_COLOR);
+
 
         panel.add(nameLabel);
         panel.add(scoreLabel);
