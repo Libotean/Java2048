@@ -7,7 +7,6 @@ public class GUI extends JFrame implements KeyListener{
 
     private final Color BG_COLOR = new Color(0x121212); // Background
     private final Color BOARD_COLOR = new Color(0x1E1E1E); // Board bg
-    private final Color EMPTY_TILE_COLOR = new Color(0x2A2A2A); // Empty tile
     private final Color FONT_COLOR = new Color(0xF5F5F5); // Text color
     private final Color RED_HUE = new Color(0x9C3A3A);  // A deep, muted red
 
@@ -54,7 +53,7 @@ public class GUI extends JFrame implements KeyListener{
 
         int[][] board = game.getGameBoard();
 
-        g.setColor(BG_COLOR);
+        g.setColor(BOARD_COLOR);
         g.fillRoundRect(startX - margin/2, startY - margin/2, boardSize + margin, boardSize + margin, 15, 15);
 
         for(int i = 0; i < 4; i++){

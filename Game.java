@@ -8,13 +8,6 @@ public class Game {
         gameBoard = new int[4][4];
     }
 
-    public void printArray(){
-        for (int[] x:  gameBoard){
-            System.out.format("%6d%6d%6d%6d\n",x[0], x[1],x[2],x[3]);
-        }
-        System.out.println();
-    }
-
     public void addNewNumbers(){
         ArrayList<int[]> emptySpaces = new ArrayList<>();
         for(int i = 0; i < 4; i++){
@@ -56,7 +49,11 @@ public class Game {
             result.add(0);
         }
 
-        return result.stream().mapToInt(i -> i).toArray();
+        int[] array = new int[4];
+        for(int i = 0; i < result.size(); i++){
+            array[i] = result.get(i);
+        }
+        return array;
     }
 
     private int[] reverse(int[] arr){
@@ -68,7 +65,7 @@ public class Game {
     }
 
     public void pushUp(){
-        System.out.println("Push up");
+        //System.out.println("Push up");
         for(int j = 0; j < 4; j++){
             int[] column = new int[4];
             for (int i = 0; i < 4; i++) column[i] = gameBoard[i][j];
@@ -79,7 +76,7 @@ public class Game {
     }
 
     public void pushDown() {
-        System.out.println("Push down");
+        //System.out.println("Push down");
         for (int j = 0; j < 4; j++) {
             int[] column = new int[4];
             for (int i = 0; i < 4; i++) column[i] = gameBoard[3 - i][j];
@@ -89,7 +86,7 @@ public class Game {
     }
 
     public void pushLeft(){
-        System.out.println("Push left");
+        //System.out.println("Push left");
         for(int i = 0; i < 4; i++){
             int[] row = gameBoard[i];
             int[] merged = mergeLine(row);
@@ -98,7 +95,7 @@ public class Game {
     }
 
     public void pushRight(){
-        System.out.println("Push right");
+        //System.out.println("Push right");
         for(int i = 0; i < 4; i++){
             int[] row = reverse(gameBoard[i]);
             int[] merged = mergeLine(row);
