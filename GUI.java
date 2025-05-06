@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 
 public class GUI extends JFrame implements KeyListener{
     private Game game;
@@ -14,7 +15,8 @@ public class GUI extends JFrame implements KeyListener{
     private JLabel highScoreLabel;
     private JLabel nameLabel;
     private int score = 0;
-    private int highScore = 0;
+    private String highScoreFile = "highscore.txt";
+    private int highScore = loadHighScore();
     private boolean hasWon = false;
 
     public GUI(){
@@ -173,6 +175,7 @@ public class GUI extends JFrame implements KeyListener{
         if(score > highScore){
             highScore = score;
             highScoreLabel.setText("High Score: " + highScore);
+            saveHighScore(highScore);
         }
 
         if(!hasWon && game.has2048()){
@@ -209,5 +212,25 @@ public class GUI extends JFrame implements KeyListener{
         repaint();
     }
 
+    private int loadHighScore(){
+        File file = new File(highScoreFile);
+        if(!file.exists()){
+            return 0;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(highScoreFile))){
+            return Integer.parseInt(reader.readLine());
+        } catch (IOException e) {
+            return 0;
+        }
+    }
+
+    private void saveHighScore(int score){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(highScoreFile))){
+            writer.write(String.valueOf(score));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
