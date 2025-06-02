@@ -9,11 +9,11 @@ public class Game {
     }
 
     public void addNewNumbers(){
-        ArrayList<int[]> emptySpaces = new ArrayList<>();
+        ArrayList<Pos> emptySpaces = new ArrayList<>();
         for(int i = 0; i < 4; i++){
             for (int j = 0; j < 4; j++){
                 if(gameBoard[i][j] == 0){
-                    emptySpaces.add(new int[]{i,j});
+                    emptySpaces.add(new Pos(i,j));
                 }
             }
         }
@@ -21,40 +21,44 @@ public class Game {
         if(!emptySpaces.isEmpty()){
             Random r = new Random();
 
-            int[] cell = emptySpaces.get(r.nextInt(emptySpaces.size()));
-            int row = cell [0];
-            int col = cell[1];
+            Pos cell = emptySpaces.get(r.nextInt(emptySpaces.size()));
+            int row = cell.x;
+            int col = cell.y;
 
             gameBoard[row][col] = r.nextInt(10) < 9 ? 2 : 4;
         }
     }
 
-    public int[] mergeLine(int[] line){
-        ArrayList<Integer> result = new ArrayList<>();
-        for(int val : line){
-            if (val != 0) result.add(val);
-        }
+    public int[] mergeLine(int[] line) {
+        int[] newLine = new int[4];
+        int index = 0;
 
-        for(int i = 0; i < result.size() - 1; i++){
-            if (result.get(i).equals(result.get(i+1))){
-                int mergedValue = result.get(i) * 2;
-                result.set(i, mergedValue);
-                score += mergedValue;
-                result.remove(i+1);
-                result.add(0);
+        for (int i = 0; i < 4; i++) {
+            if (line[i] != 0) {
+                newLine[index] = line[i];
+                index++;
+            }
+        }
+        for (int i = 0; i < 3; i++) {
+            if (newLine[i] != 0 && newLine[i] == newLine[i + 1]) {
+                newLine[i] *= 2;
+                score += newLine[i];
+                newLine[i + 1] = 0;
             }
         }
 
-        while(result.size() < 4){
-            result.add(0);
+        int[] finalLine = new int[4];
+        index = 0;
+        for (int i = 0; i < 4; i++) {
+            if (newLine[i] != 0) {
+                finalLine[index] = newLine[i];
+                index++;
+            }
         }
 
-        int[] array = new int[4];
-        for(int i = 0; i < result.size(); i++){
-            array[i] = result.get(i);
-        }
-        return array;
+        return finalLine;
     }
+
 
     private int[] reverse(int[] arr){
         int[] reversed = new int[arr.length];
@@ -79,9 +83,12 @@ public class Game {
         //System.out.println("Push down");
         for (int j = 0; j < 4; j++) {
             int[] column = new int[4];
-            for (int i = 0; i < 4; i++) column[i] = gameBoard[3 - i][j];
+            for (int i = 0; i < 4; i++) column[i] = gameBoard[i][j];
+            column = reverse(column);
             int[] merged = mergeLine(column);
-            for (int i = 0; i < 4; i++) gameBoard[3 - i][j] = merged[i];
+            merged = reverse(merged);
+            for (int i = 0; i < 4; i++) gameBoard[i][j] = merged[i];
+
         }
     }
 
@@ -130,5 +137,13 @@ public class Game {
         }
         return true; // no moves left
     }
+}
 
+class Pos{
+    int x, y;
+
+    public Pos(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 }

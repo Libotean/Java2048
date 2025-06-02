@@ -38,7 +38,6 @@ public class GUI extends JFrame implements KeyListener{
 
         setFocusable(true);
         addKeyListener(this);
-        requestFocusInWindow();
         setVisible(true);
 
         game.addNewNumbers();
