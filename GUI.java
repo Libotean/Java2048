@@ -6,10 +6,10 @@ import java.io.*;
 public class GUI extends JFrame implements KeyListener{
     private Game game;
 
-    private final Color BG_COLOR = new Color(0x121212); // Background
-    private final Color BOARD_COLOR = new Color(0x1E1E1E); // Board bg
-    private final Color FONT_COLOR = new Color(0xF5F5F5); // Text color
-    private final Color RED_HUE = new Color(0x9C3A3A);  // A deep, muted red
+    private final Color BG_COLOR = new Color(0x121212);
+    private final Color BOARD_COLOR = new Color(0x1E1E1E);
+    private final Color FONT_COLOR = new Color(0xF5F5F5);
+    private final Color RED_HUE = new Color(0x9C3A3A);
 
     private JLabel scoreLabel;
     private JLabel highScoreLabel;

@@ -7,7 +7,7 @@ public class Game {
     public Game() {
         gameBoard = new int[4][4];
     }
-
+// Add new numbers to the pannel
     public void addNewNumbers(){
         ArrayList<Pos> emptySpaces = new ArrayList<>();
         for(int i = 0; i < 4; i++){
@@ -69,7 +69,6 @@ public class Game {
     }
 
     public void pushUp(){
-        //System.out.println("Push up");
         for(int j = 0; j < 4; j++){
             int[] column = new int[4];
             for (int i = 0; i < 4; i++) column[i] = gameBoard[i][j];
@@ -80,7 +79,6 @@ public class Game {
     }
 
     public void pushDown() {
-        //System.out.println("Push down");
         for (int j = 0; j < 4; j++) {
             int[] column = new int[4];
             for (int i = 0; i < 4; i++) column[i] = gameBoard[i][j];
@@ -93,7 +91,6 @@ public class Game {
     }
 
     public void pushLeft(){
-        //System.out.println("Push left");
         for(int i = 0; i < 4; i++){
             int[] row = gameBoard[i];
             int[] merged = mergeLine(row);
@@ -102,7 +99,6 @@ public class Game {
     }
 
     public void pushRight(){
-        //System.out.println("Push right");
         for(int i = 0; i < 4; i++){
             int[] row = reverse(gameBoard[i]);
             int[] merged = mergeLine(row);
@@ -130,12 +126,12 @@ public class Game {
     public boolean isGameOver(){
         for(int i = 0; i < 4; i++){
             for(int j = 0; j < 4; j++){
-                if(gameBoard[i][j] == 0) return false; // empty space
-                if(i < 3 && gameBoard[i][j] == gameBoard[i+1][j]) return false; // vertical merge
-                if(j < 3 && gameBoard[i][j] == gameBoard[i][j+1]) return false; // horizontal merge
+                if(gameBoard[i][j] == 0) return false;
+                if(i < 3 && gameBoard[i][j] == gameBoard[i+1][j]) return false;
+                if(j < 3 && gameBoard[i][j] == gameBoard[i][j+1]) return false;
             }
         }
-        return true; // no moves left
+        return true;
     }
 }
 
